@@ -3,37 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:latext/latext.dart';
 import 'package:provider/provider.dart';
 
-class CalculatorValueDisplayWidget extends StatefulWidget {
-  const CalculatorValueDisplayWidget({super.key});
-
-  @override
-  State<CalculatorValueDisplayWidget> createState() =>
-      _CalculatorValueDisplayWidgetState();
-}
-
-class _CalculatorValueDisplayWidgetState
-    extends State<CalculatorValueDisplayWidget> {
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    print("Dispose");
-    super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    print("Did Change Dependencies");
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant CalculatorValueDisplayWidget oldWidget) {
-    // TODO: implement didUpdateWidget
-    print("didUpdateWidget");
-    super.didUpdateWidget(oldWidget);
-  }
-
+class CalculatorValueDisplayWidget extends StatelessWidget {
+  CalculatorValueDisplayWidget({super.key});
+  final displayScrollController = ScrollController();
+  final recentScrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -57,11 +30,17 @@ class _CalculatorValueDisplayWidgetState
               },
             ),
             SizedBox(height: 16),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Consumer<CalculatorProvider>(
-                builder: (context, calculator, child) {
-                  return LaTexT(
+            Consumer<CalculatorProvider>(
+              builder: (context, calculator, child) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  displayScrollController.jumpTo(
+                    displayScrollController.position.maxScrollExtent,
+                  );
+                });
+                return SingleChildScrollView(
+                  controller: displayScrollController,
+                  scrollDirection: Axis.horizontal,
+                  child: LaTexT(
                     laTeXCode: Text(
                       "\$ ${calculator.currentCalculation}\$",
                       style: TextStyle(
@@ -69,9 +48,9 @@ class _CalculatorValueDisplayWidgetState
                         fontSize: 56,
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ],
         ),

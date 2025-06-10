@@ -30,6 +30,9 @@ class CalculatorProvider extends ChangeNotifier {
         _currentCalculation = _currentDisplayCalculation;
       }
     }
+    if (_currentCalculation.length > 100) {
+      return;
+    }
     if (_currentCalculation == "0" && int.tryParse(value) == null) {
       return;
     }
@@ -134,12 +137,18 @@ class CalculatorProvider extends ChangeNotifier {
     _recentDisplayCalculation = _currentDisplayCalculation;
     _currentDisplayCalculation = result.toStringFixedPrecision();
     _currentCalculation = "0";
+    print("Result: $_currentDisplayCalculation");
+    print(expression);
+    print(result.toString());
     if (_currentDisplayCalculation.contains("e+")) {
       _currentDisplayCalculation =
           "${_currentDisplayCalculation.split("e+").first}×10^{${_currentDisplayCalculation.split("e+").last}}";
     } else if (_currentDisplayCalculation.contains("e-")) {
       _currentDisplayCalculation =
           "${_currentDisplayCalculation.split("e+").first}×10^-{${_currentDisplayCalculation.split("e+").last}}";
+    }
+    if (result.toStringFixedPrecision().contains("e+")) {
+      _recentDisplayCalculation = _currentDisplayCalculation;
     }
 
     _isCalculating = true;
