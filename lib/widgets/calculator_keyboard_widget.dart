@@ -20,19 +20,36 @@ class CalculatorKeyboardWidget extends StatelessWidget {
                 children: [
                   CalculatorButtonWidget(
                     label: "C",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.errorContainer,
+                    textColor: Theme.of(context).colorScheme.onErrorContainer,
                     onTap: () {
                       calculator.clearCurrentCalculation();
                     },
                   ),
-                  CalculatorButtonWidget(label: "+/-"),
+                  CalculatorButtonWidget(
+                    label: "+/-",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
+                  ),
                   CalculatorButtonWidget(
                     label: "%",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                     onTap: () {
                       calculator.addToCurrentCalculation("%", "\\%");
                     },
                   ),
                   CalculatorButtonWidget(
                     label: "÷",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.tertiaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
                     onTap: () {
                       calculator.addToCurrentCalculation("/", "÷");
                     },
@@ -47,6 +64,11 @@ class CalculatorKeyboardWidget extends StatelessWidget {
                   CalculatorButtonWidget(label: "9"),
                   CalculatorButtonWidget(
                     label: "×",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.tertiaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
+
                     onTap: () {
                       calculator.addToCurrentCalculation("*", "×");
                     },
@@ -61,6 +83,11 @@ class CalculatorKeyboardWidget extends StatelessWidget {
                   CalculatorButtonWidget(label: "6"),
                   CalculatorButtonWidget(
                     label: "-",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.tertiaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
+
                     onTap: () {
                       calculator.addToCurrentCalculation("-", "-");
                     },
@@ -75,6 +102,11 @@ class CalculatorKeyboardWidget extends StatelessWidget {
                   CalculatorButtonWidget(label: "3"),
                   CalculatorButtonWidget(
                     label: "+",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.tertiaryContainer,
+                    textColor:
+                        Theme.of(context).colorScheme.onTertiaryContainer,
+
                     onTap: () {
                       calculator.addToCurrentCalculation("+", "+");
                     },
@@ -88,12 +120,19 @@ class CalculatorKeyboardWidget extends StatelessWidget {
                   CalculatorButtonWidget(label: "0"),
                   CalculatorButtonWidget(
                     label: "⌫",
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
+                    textColor: Theme.of(context).colorScheme.onPrimaryContainer,
+
                     onTap: () {
                       calculator.deleteCurrentCalculation();
                     },
                   ),
                   CalculatorButtonWidget(
                     label: "=",
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    textColor: Theme.of(context).colorScheme.onPrimary,
+
                     onTap: () {
                       calculator.calculate();
                     },

@@ -5,13 +5,22 @@ import 'package:provider/provider.dart';
 class CalculatorButtonWidget extends StatelessWidget {
   final void Function()? onTap;
   final String label;
-  const CalculatorButtonWidget({super.key, this.onTap, required this.label});
+  final Color? backgroundColor;
+  final Color? textColor;
+  const CalculatorButtonWidget({
+    super.key,
+    this.onTap,
+    this.backgroundColor,
+    this.textColor,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Material(
       borderRadius: BorderRadius.circular(12),
-      color: Theme.of(context).colorScheme.tertiaryContainer,
+      color:
+          backgroundColor ?? Theme.of(context).colorScheme.surfaceContainerHigh,
       child: InkWell(
         onTap:
             onTap ??
@@ -31,7 +40,7 @@ class CalculatorButtonWidget extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 28,
-              color: Theme.of(context).colorScheme.onTertiaryContainer,
+              color: textColor ?? Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
