@@ -24,7 +24,7 @@ class CalculatorButtonWidget extends StatelessWidget {
           backgroundColor ?? Theme.of(context).colorScheme.surfaceContainerHigh,
       child: InkWell(
         onTap: () {
-          HapticFeedback.lightImpact();
+          HapticFeedback.mediumImpact();
           if (onTap != null) {
             onTap!();
             return;
