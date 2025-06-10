@@ -1,5 +1,6 @@
 import 'package:calculator/providers/calculator_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorButtonWidget extends StatelessWidget {
@@ -22,14 +23,17 @@ class CalculatorButtonWidget extends StatelessWidget {
       color:
           backgroundColor ?? Theme.of(context).colorScheme.surfaceContainerHigh,
       child: InkWell(
-        onTap:
-            onTap ??
-            () {
-              Provider.of<CalculatorProvider>(
-                context,
-                listen: false,
-              ).addToCurrentCalculation(label, label);
-            },
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (onTap != null) {
+            onTap!();
+            return;
+          }
+          Provider.of<CalculatorProvider>(
+            context,
+            listen: false,
+          ).addToCurrentCalculation(label, label);
+        },
         borderRadius: BorderRadius.circular(12),
         child: Container(
           width: MediaQuery.of(context).size.width / 5,
