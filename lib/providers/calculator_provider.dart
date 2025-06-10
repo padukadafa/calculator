@@ -21,6 +21,18 @@ class CalculatorProvider extends ChangeNotifier {
 
   addToCurrentCalculation(String value, String display) {
     if (_isCalculating) {
+      if (_currentDisplayCalculation.contains("10^") && value == ".") {
+        return;
+      }
+      if (_currentDisplayCalculation.contains("10^") &&
+          _currentDisplayCalculation.endsWith("}") &&
+          int.tryParse(value) == null) {
+        _currentDisplayCalculation += value;
+        _currentCalculation = _currentDisplayCalculation.replaceAll("×", "*");
+        _isCalculating = false;
+        notifyListeners();
+        return;
+      }
       if (int.tryParse(value) != null) {
         _recentDisplayCalculation = _currentDisplayCalculation;
         _currentCalculation = "0";
@@ -33,7 +45,15 @@ class CalculatorProvider extends ChangeNotifier {
     if (_currentCalculation.length > 100) {
       return;
     }
-    if (_currentCalculation == "0" && int.tryParse(value) == null) {
+    if (_currentCalculation == "0" && value == ".") {
+      _currentCalculation = "0.";
+      _currentDisplayCalculation = "0.";
+      notifyListeners();
+      return;
+    }
+    if (_currentCalculation == "0" &&
+        int.tryParse(value) == null &&
+        !value.contains(RegExp(r"[+-]"))) {
       return;
     }
     if (_currentCalculation.isNotEmpty &&
@@ -137,9 +157,6 @@ class CalculatorProvider extends ChangeNotifier {
     _recentDisplayCalculation = _currentDisplayCalculation;
     _currentDisplayCalculation = result.toStringFixedPrecision();
     _currentCalculation = "0";
-    print("Result: $_currentDisplayCalculation");
-    print(expression);
-    print(result.toString());
     if (_currentDisplayCalculation.contains("e+")) {
       _currentDisplayCalculation =
           "${_currentDisplayCalculation.split("e+").first}×10^{${_currentDisplayCalculation.split("e+").last}}";
