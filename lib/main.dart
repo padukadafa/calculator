@@ -2,9 +2,16 @@ import 'package:calculator/core/themes/theme.dart';
 import 'package:calculator/pages/calculator_page.dart';
 import 'package:calculator/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MainApp());
 }
 
