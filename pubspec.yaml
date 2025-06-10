@@ -1,6 +1,6 @@
 name: calculator
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -10,6 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.5
+  math_expressions: ^2.7.0
+  latext:
+    git:
+      url: https://github.com/padukadafa/latext.git
+      ref: main
 
 dev_dependencies:
   flutter_lints: ^5.0.0

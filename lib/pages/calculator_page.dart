@@ -1,8 +1,10 @@
+import 'package:calculator/providers/calculator_provider.dart';
 import 'package:calculator/providers/theme_provider.dart';
+import 'package:calculator/widgets/calculator_value_display_widget.dart';
 import 'package:calculator/widgets/reuseable_safe_area.dart';
 import 'package:calculator/widgets/theme_toggle_swith_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:latext/latext.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorPage extends StatelessWidget {
@@ -13,11 +15,17 @@ class CalculatorPage extends StatelessWidget {
     final provider = Provider.of<ThemeProvider>(context);
     return ReuseableSafeArea(
       themeMode: provider.themeMode,
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [ThemeToggleSwithWidget(provider: provider)],
+      child: ChangeNotifierProvider(
+        create: (context) => CalculatorProvider(),
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ThemeToggleSwithWidget(provider: provider),
+                CalculatorValueDisplayWidget(),
+              ],
+            ),
           ),
         ),
       ),
