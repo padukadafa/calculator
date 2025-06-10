@@ -23,7 +23,6 @@ class CalculatorPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ThemeToggleSwithWidget(provider: provider),
                 CalculatorValueDisplayWidget(),
                 CalculatorKeyboardWidget(),
               ],
